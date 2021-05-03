@@ -7,6 +7,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.stripe.android.R
 import com.stripe.android.auth.PaymentBrowserAuthContract
 import com.stripe.android.view.PaymentAuthWebViewActivity
 
@@ -48,7 +49,10 @@ internal class StripeBrowserLauncherActivity : AppCompatActivity() {
         )
 
         launcher.launch(
-            viewModel.createLaunchIntent(args)
+            viewModel.createLaunchIntent(
+                args,
+                getString(R.string.stripe_verify_your_payment)
+            )
         )
     }
 

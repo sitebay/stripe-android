@@ -29,8 +29,7 @@ class StripeBrowserLauncherViewModelTest {
     private val viewModel = StripeBrowserLauncherViewModel(
         analyticsRequestExecutor,
         analyticsRequestFactory,
-        BrowserCapabilities.CustomTabs,
-        "Verify your payment"
+        BrowserCapabilities.CustomTabs
     )
 
     @Test
@@ -41,7 +40,8 @@ class StripeBrowserLauncherViewModelTest {
                 requestCode = 50000,
                 clientSecret = "pi_1F7J1aCRMbs6FrXfaJcvbxF6_secret_mIuDLsSfoo1m6s",
                 url = "https://bank.com"
-            )
+            ),
+            "Verify your payment"
         )
 
         val browserIntent =

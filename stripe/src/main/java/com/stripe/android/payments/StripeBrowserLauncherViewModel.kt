@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.stripe.android.AnalyticsEvent
 import com.stripe.android.PaymentConfiguration
-import com.stripe.android.R
 import com.stripe.android.auth.PaymentBrowserAuthContract
 import com.stripe.android.networking.AnalyticsRequestExecutor
 import com.stripe.android.networking.AnalyticsRequestFactory
@@ -17,12 +16,12 @@ import com.stripe.android.networking.AnalyticsRequestFactory
 internal class StripeBrowserLauncherViewModel(
     private val analyticsRequestExecutor: AnalyticsRequestExecutor,
     private val analyticsRequestFactory: AnalyticsRequestFactory,
-    private val browserCapabilities: BrowserCapabilities,
-    private val intentChooserTitle: String
+    private val browserCapabilities: BrowserCapabilities
 ) : ViewModel() {
 
     fun createLaunchIntent(
-        args: PaymentBrowserAuthContract.Args
+        args: PaymentBrowserAuthContract.Args,
+        intentChooserTitle: String
     ): Intent {
         val shouldUseCustomTabs = browserCapabilities == BrowserCapabilities.CustomTabs
         logCapabilities(shouldUseCustomTabs)
@@ -96,8 +95,7 @@ internal class StripeBrowserLauncherViewModel(
                     application,
                     config.publishableKey
                 ),
-                browserCapabilitiesSupplier.get(),
-                application.getString(R.string.stripe_verify_your_payment)
+                browserCapabilitiesSupplier.get()
             ) as T
         }
     }
