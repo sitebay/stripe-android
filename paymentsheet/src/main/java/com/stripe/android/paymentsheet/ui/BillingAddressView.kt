@@ -18,11 +18,11 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.stripe.android.R
-import com.stripe.android.databinding.StripeBillingAddressLayoutBinding
 import com.stripe.android.model.Address
-import com.stripe.android.model.CountryCode
-import com.stripe.android.view.Country
-import com.stripe.android.view.CountryUtils
+import com.stripe.android.paymentsheet.databinding.StripeBillingAddressLayoutBinding
+import com.stripe.android.paymentsheet.elements.country.Country
+import com.stripe.android.paymentsheet.elements.country.CountryCode
+import com.stripe.android.paymentsheet.elements.country.CountryUtils
 import com.stripe.android.view.PostalCodeValidator
 import java.util.Locale
 import kotlin.properties.Delegates

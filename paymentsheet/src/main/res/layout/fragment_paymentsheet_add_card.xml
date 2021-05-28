@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/stripe_paymentsheet_outer_spacing_top"
     android:paddingHorizontal="@dimen/stripe_paymentsheet_outer_spacing_horizontal"
-    tools:context=".paymentsheet.PaymentSheetListFragment">
+    tools:context="com.stripe.android.paymentsheet.PaymentSheetListFragment">
 
     <LinearLayout
         android:id="@+id/top_container"

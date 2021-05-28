@@ -8,11 +8,11 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import com.stripe.android.R
-import com.stripe.android.databinding.LayoutPaymentsheetAddCardItemBinding
-import com.stripe.android.databinding.LayoutPaymentsheetGooglePayItemBinding
-import com.stripe.android.databinding.LayoutPaymentsheetPaymentMethodItemBinding
 import com.stripe.android.model.CardBrand
 import com.stripe.android.model.PaymentMethod
+import com.stripe.android.paymentsheet.databinding.LayoutPaymentsheetAddCardItemBinding
+import com.stripe.android.paymentsheet.databinding.LayoutPaymentsheetGooglePayItemBinding
+import com.stripe.android.paymentsheet.databinding.LayoutPaymentsheetPaymentMethodItemBinding
 import com.stripe.android.paymentsheet.model.FragmentConfig
 import com.stripe.android.paymentsheet.model.PaymentSelection
 import com.stripe.android.paymentsheet.model.SavedSelection

@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
-import com.stripe.android.databinding.StripeGooglePayButtonBinding
+import com.stripe.android.paymentsheet.databinding.StripeGooglePayButtonBinding
 
 internal class GooglePayButton @JvmOverloads constructor(
     context: Context,

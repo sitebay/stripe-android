@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
-import com.stripe.android.databinding.StripeGooglePayDividerBinding
+import com.stripe.android.paymentsheet.databinding.StripeGooglePayDividerBinding
 
 internal class GooglePayDivider @JvmOverloads constructor(
     context: Context,

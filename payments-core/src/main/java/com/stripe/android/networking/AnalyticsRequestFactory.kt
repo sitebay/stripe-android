@@ -10,7 +10,6 @@ import com.stripe.android.model.PaymentMethodCreateParams
 import com.stripe.android.model.Source
 import com.stripe.android.model.Token
 import com.stripe.android.paymentsheet.analytics.DeviceId
-import com.stripe.android.paymentsheet.analytics.PaymentSheetEvent
 import com.stripe.android.paymentsheet.analytics.SessionId
 import com.stripe.android.utils.ContextUtils.packageInfo
 
