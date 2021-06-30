@@ -200,9 +200,7 @@ internal class PaymentSheetViewModel @Inject internal constructor(
             runCatching {
                 customerConfig?.let { customerConfig ->
                     stripeIntent.paymentMethodTypes.mapNotNull {
-                        SupportedSavedPaymentMethod.fromCode(it)
-                    }.map {
-                        it.type
+                        SupportedSavedPaymentMethod.fromCode(it)?.type
                     }.let {
                         paymentMethodsRepository.get(
                             customerConfig,

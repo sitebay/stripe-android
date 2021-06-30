@@ -50,7 +50,7 @@ internal class PaymentMethodsApiRepository(
             }.awaitAll().flatten()
         }.onFailure {
             logger.error("Failed to retrieve ${customerConfig.id}'s payment methods.", it)
-        }.getOrDefault(listOf())
+        }.getOrDefault(emptyList())
     }
 
     private companion object {
