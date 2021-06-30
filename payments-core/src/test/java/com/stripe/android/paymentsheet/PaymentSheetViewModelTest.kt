@@ -73,7 +73,7 @@ internal class PaymentSheetViewModelTest {
     private val application = ApplicationProvider.getApplicationContext<Application>()
 
     @Captor
-    private lateinit var paymentMethodTypeCaptor: ArgumentCaptor<PaymentMethod.Type>
+    private lateinit var paymentMethodTypeCaptor: ArgumentCaptor<List<PaymentMethod.Type>>
 
     @BeforeTest
     fun setup() {
@@ -153,7 +153,7 @@ internal class PaymentSheetViewModelTest {
             viewModel.updatePaymentMethods(stripeIntent)
             verify(paymentMethodsRepository).get(any(), capture(paymentMethodTypeCaptor))
             assertThat(paymentMethodTypeCaptor.allValues)
-                .containsExactly(PaymentMethod.Type.Card)
+                .containsExactly(listOf(PaymentMethod.Type.Card))
         }
 
     @Test

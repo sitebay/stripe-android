@@ -40,7 +40,7 @@ internal class PaymentMethodsRepositoryTest {
                 "customer_id",
                 "ephemeral_key"
             ),
-            PaymentMethod.Type.Card
+            listOf(PaymentMethod.Type.Card)
         )
 
         assertThat(stripeRepository.paramArgs)

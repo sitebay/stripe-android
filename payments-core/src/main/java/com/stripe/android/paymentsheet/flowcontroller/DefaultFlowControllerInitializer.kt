@@ -72,9 +72,8 @@ internal class DefaultFlowControllerInitializer(
                 }.map {
                     it.type
                 }
-                retrieveAllPaymentMethods(
-                    types = paymentMethodTypes,
-                    customerConfig
+                paymentMethodsRepository.get(
+                    customerConfig, paymentMethodTypes
                 ).filter { paymentMethod ->
                     SupportedSavedPaymentMethod.isSupported(paymentMethod)
                 }.let { paymentMethods ->
@@ -157,15 +156,6 @@ internal class DefaultFlowControllerInitializer(
             }?.let {
                 prefsRepository.savePaymentSelection(it)
             }
-        }
-    }
-
-    private suspend fun retrieveAllPaymentMethods(
-        types: List<PaymentMethod.Type>,
-        customerConfig: PaymentSheet.CustomerConfiguration
-    ): List<PaymentMethod> {
-        return types.flatMap { type ->
-            paymentMethodsRepository.get(customerConfig, type)
         }
     }
 

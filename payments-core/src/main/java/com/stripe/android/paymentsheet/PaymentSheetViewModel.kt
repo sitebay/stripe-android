@@ -44,8 +44,6 @@ import com.stripe.android.paymentsheet.repositories.StripeIntentRepository
 import com.stripe.android.paymentsheet.ui.PrimaryButton
 import com.stripe.android.paymentsheet.viewmodels.BaseSheetViewModel
 import com.stripe.android.view.AuthActivityStarterHost
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -204,13 +202,13 @@ internal class PaymentSheetViewModel @Inject internal constructor(
                     stripeIntent.paymentMethodTypes.mapNotNull {
                         SupportedSavedPaymentMethod.fromCode(it)
                     }.map {
-                        async {
-                            paymentMethodsRepository.get(
-                                customerConfig,
-                                it.type
-                            )
-                        }
-                    }.awaitAll().flatten().filter { paymentMethod ->
+                        it.type
+                    }.let {
+                        paymentMethodsRepository.get(
+                            customerConfig,
+                            it
+                        )
+                    }.filter { paymentMethod ->
                         SupportedSavedPaymentMethod.isSupported(paymentMethod).also { valid ->
                             if (!valid) {
                                 logger.error(

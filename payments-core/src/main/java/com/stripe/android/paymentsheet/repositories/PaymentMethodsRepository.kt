@@ -6,6 +6,6 @@ import com.stripe.android.paymentsheet.PaymentSheet
 internal interface PaymentMethodsRepository {
     suspend fun get(
         customerConfig: PaymentSheet.CustomerConfiguration,
-        type: PaymentMethod.Type
+        types: List<PaymentMethod.Type>
     ): List<PaymentMethod>
 }

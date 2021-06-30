@@ -10,6 +10,6 @@ class FakePaymentMethodsRepository(
     var error: Throwable? = null
     override suspend fun get(
         customerConfig: PaymentSheet.CustomerConfiguration,
-        type: PaymentMethod.Type
+        types: List<PaymentMethod.Type>
     ): List<PaymentMethod> = paymentMethods
 }

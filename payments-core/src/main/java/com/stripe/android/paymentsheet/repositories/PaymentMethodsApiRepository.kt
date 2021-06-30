@@ -6,6 +6,8 @@ import com.stripe.android.model.PaymentMethod
 import com.stripe.android.networking.ApiRequest
 import com.stripe.android.networking.StripeRepository
 import com.stripe.android.paymentsheet.PaymentSheet
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
@@ -22,29 +24,33 @@ internal class PaymentMethodsApiRepository(
     private val logger = Logger.getInstance(enableLogging)
 
     /**
-     * Retrieve a Customer's payment methods. Silently handle failures by returning an
-     * empty list.
+     * Retrieve a Customer's payment methods of the given types. Silently handle failures by
+     * returning an empty list.
      */
     override suspend fun get(
         customerConfig: PaymentSheet.CustomerConfiguration,
-        type: PaymentMethod.Type
+        types: List<PaymentMethod.Type>
     ): List<PaymentMethod> = withContext(workContext) {
         runCatching {
-            stripeRepository.getPaymentMethods(
-                ListPaymentMethodsParams(
-                    customerId = customerConfig.id,
-                    paymentMethodType = type
-                ),
-                publishableKey,
-                PRODUCT_USAGE,
-                ApiRequest.Options(
-                    customerConfig.ephemeralKeySecret,
-                    stripeAccountId
-                )
-            )
+            types.map { type ->
+                async {
+                    stripeRepository.getPaymentMethods(
+                        ListPaymentMethodsParams(
+                            customerId = customerConfig.id,
+                            paymentMethodType = type
+                        ),
+                        publishableKey,
+                        PRODUCT_USAGE,
+                        ApiRequest.Options(
+                            customerConfig.ephemeralKeySecret,
+                            stripeAccountId
+                        )
+                    )
+                }
+            }.awaitAll().flatten()
         }.onFailure {
             logger.error("Failed to retrieve ${customerConfig.id}'s payment methods.", it)
-        }.getOrDefault(emptyList())
+        }.getOrDefault(listOf())
     }
 
     private companion object {
