@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 16.10.1 - 2021-07-02
+* [3811](https://github.com/stripe/stripe-android/pull/3811) Fix `CountryCode` parceling
+* [3833](https://github.com/stripe/stripe-android/pull/3833) Fix coroutine usage in Stripe3DS2Authenticator
+* [3863](https://github.com/stripe/stripe-android/pull/3863) Make `PayWithGoogleUtils#getPriceString()` Locale-agnostic
+* [3892](https://github.com/stripe/stripe-android/pull/3892) Add PaymentSheet support for Jetpack Compose
+* [3905](https://github.com/stripe/stripe-android/pull/3905) Fix `StripeEditText` crash on instantiation
+
 ## 16.10.0 - 2021-05-28
 * [3752](https://github.com/stripe/stripe-android/pull/3752) Support connected accounts when using Google Pay in PaymentSheet
 * [3761](https://github.com/stripe/stripe-android/pull/3761) Publish `CardFormView`
