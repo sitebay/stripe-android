@@ -41,7 +41,7 @@ sealed class FormItemSpec {
     /**
      * This is for elements that do not receive user input
      */
-    data class StaticTextSpec(
+    data class MandateTextSpec(
         override val identifier: IdentifierSpec,
         @StringRes val stringResId: Int,
         val color: Color
@@ -67,4 +67,6 @@ sealed class SectionFieldSpec(val identifier: IdentifierSpec) {
     object Email : SectionFieldSpec(IdentifierSpec("email"))
 
     object Country : SectionFieldSpec(IdentifierSpec("country"))
+
+    object IdealBank : SectionFieldSpec(IdentifierSpec("bank"))
 }
