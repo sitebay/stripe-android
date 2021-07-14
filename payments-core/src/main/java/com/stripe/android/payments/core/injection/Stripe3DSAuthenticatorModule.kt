@@ -4,10 +4,6 @@ import android.content.Context
 import com.stripe.android.PaymentAuthConfig
 import com.stripe.android.model.StripeIntent
 import com.stripe.android.model.StripeIntent.NextActionData
-import com.stripe.android.networking.AnalyticsRequestExecutor
-import com.stripe.android.networking.AnalyticsRequestFactory
-import com.stripe.android.networking.RetryDelaySupplier
-import com.stripe.android.networking.StripeRepository
 import com.stripe.android.payments.core.authentication.PaymentAuthenticator
 import com.stripe.android.payments.core.authentication.threeds2.DefaultStripe3ds2ChallengeResultProcessor
 import com.stripe.android.payments.core.authentication.threeds2.Stripe3DS2Authenticator
@@ -37,6 +33,11 @@ internal abstract class Stripe3DSAuthenticatorModule {
         stripe3ds2Authenticator: Stripe3DS2Authenticator
     ): PaymentAuthenticator<StripeIntent>
 
+    @Binds
+    abstract fun bindsStripe3ds2ChallengeResultProcessor(
+        defaultStripe3ds2ChallengeResultProcessor: DefaultStripe3ds2ChallengeResultProcessor
+    ): Stripe3ds2ChallengeResultProcessor
+
     companion object {
         @Provides
         @Singleton
@@ -54,25 +55,6 @@ internal abstract class Stripe3DSAuthenticatorModule {
             @IOContext workContext: CoroutineContext,
         ): StripeThreeDs2Service {
             return StripeThreeDs2ServiceImpl(context, enableLogging, workContext)
-        }
-
-        @Provides
-        @Singleton
-        fun provideStripe3ds2ChallengeResultProcessor(
-            stripeRepository: StripeRepository,
-            analyticsRequestExecutor: AnalyticsRequestExecutor,
-            analyticsRequestFactory: AnalyticsRequestFactory,
-            @Named(ENABLE_LOGGING) enableLogging: Boolean,
-            @IOContext workContext: CoroutineContext
-        ): Stripe3ds2ChallengeResultProcessor {
-            return DefaultStripe3ds2ChallengeResultProcessor(
-                stripeRepository,
-                analyticsRequestExecutor,
-                analyticsRequestFactory,
-                RetryDelaySupplier(),
-                enableLogging,
-                workContext
-            )
         }
     }
 }
