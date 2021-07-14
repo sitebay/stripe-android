@@ -105,12 +105,7 @@ internal class DefaultPaymentAuthenticatorRegistry @Inject internal constructor(
          * Retrieve an instance by its id.
          */
         fun retrieveInstance(id: Int): DefaultPaymentAuthenticatorRegistry? {
-            staticCache.forEach {
-                if (it.paymentAuthenticatorRegistryId == id) {
-                    return it
-                }
-            }
-            return null
+            return staticCache.firstOrNull { it.paymentAuthenticatorRegistryId == id }
         }
 
         /**
