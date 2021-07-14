@@ -31,7 +31,8 @@ class DefaultPaymentAuthenticatorRegistryTest {
             NextActionData.RedirectToUrl::class.java to redirectToUrlAuthenticator,
             NextActionData.AlipayRedirect::class.java to alipayRedirectAuthenticator,
             NextActionData.DisplayOxxoDetails::class.java to dispayOxxoDetailsAuthenticator
-        )
+        ),
+        paymentAuthenticatorRegistryId = 1
     )
 
     @Test

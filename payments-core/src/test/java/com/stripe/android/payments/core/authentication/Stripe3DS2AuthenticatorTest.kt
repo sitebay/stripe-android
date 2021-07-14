@@ -26,8 +26,6 @@ class Stripe3DS2AuthenticatorTest {
     private val activity: ComponentActivity = mock()
     private val host = AuthActivityStarterHost.create(activity)
 
-    private var threeDs1IntentReturnUrlMap = mutableMapOf<String, String>()
-
     private val paymentAuthConfig = PaymentAuthConfig.Builder().set3ds2Config(
         PaymentAuthConfig.Stripe3ds2Config.Builder()
             .setTimeout(5)
@@ -37,7 +35,7 @@ class Stripe3DS2AuthenticatorTest {
     private val authenticator = Stripe3DS2Authenticator(
         paymentAuthConfig,
         enableLogging = false,
-        threeDs1IntentReturnUrlMap
+        paymentAuthenticatorRegistryId = 1
     )
 
     @Test

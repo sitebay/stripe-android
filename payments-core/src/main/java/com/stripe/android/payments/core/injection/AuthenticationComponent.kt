@@ -7,10 +7,13 @@ import com.stripe.android.networking.AnalyticsRequestExecutor
 import com.stripe.android.networking.AnalyticsRequestFactory
 import com.stripe.android.networking.StripeRepository
 import com.stripe.android.payments.core.authentication.DefaultPaymentAuthenticatorRegistry
+import com.stripe.android.payments.core.authentication.PaymentAuthenticatorRegistry
+import com.stripe.android.payments.core.authentication.threeds2.Stripe3ds2TransactionViewModel
 import com.stripe.android.view.AuthActivityStarterHost
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Named
+import javax.inject.Qualifier
 import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
@@ -30,6 +33,8 @@ import kotlin.coroutines.CoroutineContext
 )
 internal interface AuthenticationComponent {
     val registry: DefaultPaymentAuthenticatorRegistry
+
+    fun inject(stripe3ds2TransactionViewModel: Stripe3ds2TransactionViewModel)
 
     @Component.Builder
     interface Builder {
@@ -69,6 +74,15 @@ internal interface AuthenticationComponent {
             threeDs1IntentReturnUrlMap: MutableMap<String, String>
         ): Builder
 
+        @BindsInstance
+        fun paymentAuthenticatorRegistryId(@PaymentAuthenticatorRegistryId id: Int): Builder
+
         fun build(): AuthenticationComponent
     }
 }
+
+/**
+ * Annotation to identify an [PaymentAuthenticatorRegistry] instance.
+ */
+@Qualifier
+annotation class PaymentAuthenticatorRegistryId
